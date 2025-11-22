@@ -1,0 +1,48 @@
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                text-align: center;
+                margin-bottom: 40px;
+                font-size: 2rem;
+            }
+
+            .categories {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .category-card {
+                background-color: white;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s;
+                cursor: pointer;
+            }
+
+            .category-card:hover {
+                transform: translateY(-10px);
+            }
+
+            .category-img {
+                height: 200px;
+                background-color: #f0f0f0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 3rem;
+                color: var(--primary);
+            }
+
+            .category-content {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .category-content h3 {
+                margin-bottom: 10px;
+            }

@@ -1,0 +1,74 @@
+     .product-card {
+                background-color: white;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s;
+            }
+
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .product-img {
+                height: 200px;
+                background-color: #f8f9fa;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+
+            .product-img i {
+                font-size: 3rem;
+                color: var(--gray);
+            }
+
+            .product-badge {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: var(--secondary);
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 0.8rem;
+            }
+
+            .product-content {
+                padding: 20px;
+            }
+
+            .product-title {
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+
+            .product-price {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+
+            .current-price {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: var(--primary);
+            }
+
+            .original-price {
+                text-decoration: line-through;
+                color: var(--gray);
+            }
+
+            .product-rating {
+                color: #ffc107;
+                margin-bottom: 15px;
+            }
+
+            .product-actions {
+                display: flex;
+                justify-content: space-between;
+            }
