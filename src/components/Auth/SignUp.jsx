@@ -3,7 +3,7 @@ import "../styles/SignUp.css"
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {  getUserData, setSignError } from '../store/slicers/userSlicer';
+import {  createUser, setSignError } from '../store/slicers/userSlicer';
 export default function SignUp() {
     const [username,setUsername]=useState("");
     const [email,setEmail]=useState("");
@@ -89,7 +89,7 @@ export default function SignUp() {
     function submitData(e) {
         e.preventDefault();
         if (validateForm()) {
-            dispatch(getUserData({
+            dispatch(createUser({
                 "username": username,
                 "email": email,
                 "password": pass,

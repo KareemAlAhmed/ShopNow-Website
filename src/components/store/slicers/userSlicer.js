@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-export const getUserData = createAsyncThunk("user/getData", async (userData,{rejectWithValue}) => { 
+import { socketService } from "../../Server/socketService";
+export const createUser = createAsyncThunk("user/create", async (userData,{rejectWithValue}) => { 
     try{
         const response = await axios.post("/api/user/create",userData); 
         return response.data.user; 
@@ -8,7 +9,14 @@ export const getUserData = createAsyncThunk("user/getData", async (userData,{rej
         return rejectWithValue( error.response?.data?.error);
     }
     }); 
-
+export const loginUser = createAsyncThunk("user/login", async (userData,{rejectWithValue}) => { 
+    try{
+        const response = await axios.post("/api/user/login",userData); 
+        return response.data.user; 
+    }catch(error){
+        return rejectWithValue( error.response?.data?.error);
+    }
+    }); 
 const userSlicer=createSlice({
     name:"user",
     initialState:{currentUser:{},error:{},loading:false},
@@ -22,16 +30,48 @@ const userSlicer=createSlice({
             state.error=actions.payload;  
         }
     },extraReducers: (build)=>{
-        build.addCase(getUserData.pending,(state)=>{
+        build.addCase(createUser.pending,(state)=>{
             state.loading=true;
             state.error={};
         })
-        .addCase(getUserData.fulfilled, (state,actions)=>{
+        .addCase(createUser.fulfilled, (state,actions)=>{
             state.loading=false;
             state.currentUser=actions.payload;
             state.error={};
+            if (socketService.isConnected()) {
+                console.log('🎉 Emitting new_client after user creation');
+                socketService.emit("new_client", {
+                    clientId: socketService.getSocket()?.id,
+                    clientName: actions.payload.username
+                });
+            } else {
+                console.warn('⚠️ Cannot emit new_client - socket not connected');
+            }
         })
-        .addCase(getUserData.rejected, (state,actions)=>{
+        .addCase(createUser.rejected, (state,actions)=>{
+            state.loading=false;
+            state.error=actions.payload;
+        })
+
+        build.addCase(loginUser.pending,(state)=>{
+            state.loading=true;
+            state.error={};
+        })
+        .addCase(loginUser.fulfilled, (state,actions)=>{
+            state.loading=false;
+            state.currentUser=actions.payload;
+            state.error={};
+             if (socketService.isConnected()) {
+                console.log('🎉 Emitting new_client after login');
+                socketService.emit("new_client", {
+                    clientId: socketService.getSocket()?.id,
+                    clientName: actions.payload.username
+                });
+            } else {
+                console.warn('⚠️ Cannot emit new_client - socket not connected');
+            }
+        })
+        .addCase(loginUser.rejected, (state,actions)=>{
             state.loading=false;
             state.error=actions.payload;
         })

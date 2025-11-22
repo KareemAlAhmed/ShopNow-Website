@@ -1,12 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from "../NavBar.jsx"
 import Footer from '../Footer.jsx';
 import "../styles/Login.css"
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../store/slicers/userSlicer.js';
 export default function Login() {
     const navigate=useNavigate();
-    const {currentUser}=useSelector(s=>s.user);
+    const dispatch=useDispatch();
+
+    const {error,currentUser}=useSelector(s=>s.user);
+    const [email,setEmail]=useState("");
+    const [pass,setPass]=useState("");
+
+    function submitData(e) {
+            e.preventDefault();
+            dispatch(loginUser({               
+                    "email": email,
+                    "password": pass
+            }));
+            
+        }
 
     useEffect(()=>{
         if(Object.keys(currentUser).length !== 0){
@@ -23,15 +37,30 @@ export default function Login() {
                 <p>Sign in to your account</p>
             </div>
             
-            <form>
+            <form  onSubmit={e=>{submitData(e)}}>
                 <div className="form-group">
                     <label htmlFor="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter your email" />
+                    <input type="email" 
+                        className={`form-input ${error.email ? 'error' : ''}`} 
+                        id="email" 
+                        placeholder="Enter your email"
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                    />
+                    {error.email && <div className="error-message">{error.email}</div>}
                 </div>
                 
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" />
+                    <input type="password" 
+                        id="password" 
+                        placeholder="Enter your password" 
+                        className={`form-input ${error.password ? 'error' : ''}`} 
+                        value={pass} 
+                        onChange={(e) => setPass(e.target.value)} 
+                        />
+                    {error.password && <div className="error-message">{error.password}</div>}
+
                 </div>
                 
                 <div className="auth-options">
