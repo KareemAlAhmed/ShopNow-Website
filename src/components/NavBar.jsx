@@ -1,7 +1,10 @@
 import React from 'react'
 import "./styles/NavBar.css"
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 export default function NavBar() {
+    const {currentUser}=useSelector(s=>s.user);
+
   return (
      <header>
             <div className="top-bar">
@@ -38,11 +41,18 @@ export default function NavBar() {
                             <i className="far fa-heart"></i>
                             <span>Wishlist</span>
                         </div>
+                            <Link to={currentUser?.id ?"/cart" : "/login"}>
                         <div className="header-action cart-icon">
-                            <i className="fas fa-shopping-cart"></i>
-                            <span>Cart</span>
-                            <div className="cart-count">3</div>
+                                <i className="fas fa-shopping-cart"></i>
+                                <span>Cart</span>
+                                
+                                {
+                                    currentUser?.cart ? (<div className="cart-count">{currentUser?.cart.length}</div>) : null
+                                }
+                            
+                            
                         </div>
+                            </Link>
                     </div>
                 </div>
             </div>

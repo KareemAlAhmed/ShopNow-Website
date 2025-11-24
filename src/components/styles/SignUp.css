@@ -1,5 +1,5 @@
 
-        .btn { 
+        .signup-page .btn { 
             padding: 12px 24px;       
             border-radius: 6px;
             width: 100%;
@@ -7,13 +7,13 @@
         }
 
 
-        .btn-outline {
+        .signup-page .btn-outline {
             background-color: transparent;
             border: 1px solid var(--primary);
             color: var(--primary);
         }
 
-        .btn-outline:hover {
+       .signup-page .btn-outline:hover {
             background-color: var(--primary);
             color: white;
         }

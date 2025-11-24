@@ -268,6 +268,7 @@
                 overflow: hidden;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
                 transition: transform 0.3s;
+                cursor: pointer;
             }
 
             .product-card:hover {
@@ -275,19 +276,6 @@
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             }
 
-            .product-img {
-                height: 200px;
-                background-color: #f8f9fa;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-            }
-
-            .product-img i {
-                font-size: 3rem;
-                color: var(--gray);
-            }
 
             .product-badge {
                 position: absolute;
@@ -300,9 +288,7 @@
                 font-size: 0.8rem;
             }
 
-            .product-content {
-                padding: 20px;
-            }
+
 
             .product-title {
                 font-weight: 600;
@@ -332,10 +318,6 @@
                 margin-bottom: 15px;
             }
 
-            .product-actions {
-                display: flex;
-                justify-content: space-between;
-            }
 
   
 
@@ -411,4 +393,49 @@
 .strength-strong {
     background: #28a745;
     width: 100%;
+}
+
+.custom-success-toast {
+  background: var(--primary) !important;
+  color: white !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.custom-error-toast {
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.custom-info-toast {
+  background: #3a86ff;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+}
+
+.custom-warning-toast {
+  background: #f59e0b;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Progress bar colors */
+.custom-success-toast .Toastify__progress-bar {
+  background: #047857;
+}
+
+.custom-error-toast .Toastify__progress-bar {
+  background: #dc2626;
+}
+
+.custom-info-toast .Toastify__progress-bar {
+  background: #2563eb;
+}
+
+.custom-warning-toast .Toastify__progress-bar {
+  background: #d97706;
 }

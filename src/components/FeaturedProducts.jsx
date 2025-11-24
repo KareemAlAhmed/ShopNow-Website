@@ -1,7 +1,11 @@
 import React from 'react'
 import "./styles/FeaturedProds.css"
 import ProductCard from './ProductCard';
+import { useSelector } from 'react-redux';
 export default function FeaturedProducts() {
+  const {showProds}=useSelector(s=>s.product);
+
+
   return (
      <section className="section">
             <div className="container">
@@ -31,11 +35,22 @@ export default function FeaturedProducts() {
                             </div>
                         </div>
                     </div> */}
-                    <ProductCard prodName="Wireless Headphones" originalPrice={99.99} currentPrice={79.99} isSale={true} isNew={false} />
-                    <ProductCard prodName="Smartphone X Pro" originalPrice={899.99} currentPrice={899.99} isSale={false} isNew={false} />
-                    <ProductCard prodName="Running Shoes" originalPrice={129.99} currentPrice={129.99} isSale={false} isNew={true} />
-                    <ProductCard prodName="Smart Watch" originalPrice={249.99} currentPrice={199.99} isSale={true} isNew={false} />
-                    
+
+                    {
+                        showProds.length > 0 && (
+                            showProds.slice(0,4).map(prod=>{
+                                return <ProductCard product={prod} isSale={false} isNew={false} key={prod.id} />
+                            })
+                        )
+                    }
+                    {/* <ProductCard prodName="Wireless Headphones" originalPrice={99.99} currentPrice={79.99} isSale={true} isNew={false} prodId={1}/>
+                    <ProductCard prodName="Smartphone X Pro" originalPrice={899.99} currentPrice={899.99} isSale={false} isNew={false} prodId={1} />
+                    <ProductCard prodName="Running Shoes" originalPrice={129.99} currentPrice={129.99} isSale={false} isNew={true} prodId={1} />
+                    <ProductCard prodName="Smart Watch" originalPrice={249.99} currentPrice={199.99} isSale={true} isNew={false} prodId={1} />
+                     */}
+
+
+
                     {/* <div className="product-card">
                         <div className="product-img">
                             <i className="fas fa-mobile-alt"></i>
